@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private accountService: AccountService) {
     this.loginForm = this.formBuilder.group({
       username: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
       password: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(50)]]
@@ -37,8 +38,8 @@ export class LoginComponent {
       password: this.loginForm.get('password')?.value
     };
 
-    // this.accountService.login(applicationUserLogin).subscribe((response: any) => {
+    this.accountService.login(applicationUserLogin).subscribe((response: any) => {
     //   this.router.navigate(['/dashboard']);
-    // });
+    });
   }
 }

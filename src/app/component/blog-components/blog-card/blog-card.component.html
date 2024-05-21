@@ -1,0 +1,23 @@
+<div class="card" style="width: 20rem;">
+    @if (!!blogPhotoUrl) {
+        <img class="card-img-top img-fluid" src="{{blogPhotoUrl}}">
+    }
+    <div class="card-body">
+        <h4 class="card-title">
+            {{blog.title}}
+        </h4>
+
+        @if (!!blogPhotoUrl) {
+            <p class="card-text">{{blog.content | summary:100}}</p>
+        }
+
+        @if (!blogPhotoUrl) {
+            <p class="card-text">{{blog.content | summary:300}}</p>
+        }
+
+        <button class="btn btn-xs bg-primary text-light" (click)="readMore(blog.blogId)">
+            Read More
+        </button>
+
+    </div>
+</div>
