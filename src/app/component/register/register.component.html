@@ -12,9 +12,11 @@
             formControlName="fullname"
             placeholder="Full Name">
 
-        <div *ngIf="hasError('fullname', 'minlength') || hasError('fullname', 'maxlength')" class="invalid-feedback">
-            Must be between 10-30 characters
-        </div>
+        @if (hasError('fullname', 'minlength') || hasError('fullname', 'maxlength')) {
+            <div class="invalid-feedback">
+                Must be between 10-30 characters
+            </div>
+        }
     </div>
 
     <div class="mb-3">
@@ -25,14 +27,17 @@
             class="form-control form-control-lg"
             formControlName="username"
             placeholder="Username">
+        @if (hasError('username', 'required')) {
+            <div class="invalid-feedback">
+                Username is required
+            </div>
+        }
 
-        <div *ngIf="hasError('username', 'required')" class="invalid-feedback">
-            Username is required
-        </div>
-
-        <div *ngIf="hasError('username', 'minlength') || hasError('username', 'maxlength')" class="invalid-feedback">
-            Must be between 5-20 characters
-        </div>
+        @if (hasError('username', 'minlength') || hasError('username', 'maxlength')) {
+            <div class="invalid-feedback">
+                Must be between 5-20 characters
+            </div>
+        }
     </div>
 
     <div class="mb-3">
@@ -44,17 +49,23 @@
             formControlName="email"
             placeholder="Email">
 
-        <div *ngIf="hasError('email', 'required')" class="invalid-feedback">
-            Email is required
-        </div>
+        @if (hasError('email', 'required')) {
+            <div class="invalid-feedback">
+                Email is required
+            </div>
+        }
 
-        <div *ngIf="hasError('email', 'pattern')" class="invalid-feedback">
-            Invalid email format
-        </div>  
+        @if (hasError('email', 'pattern')) {
+            <div class="invalid-feedback">
+                Invalid email format
+            </div>  
+        }
 
-        <div *ngIf="hasError('email', 'maxlength')" class="invalid-feedback">
-            Can be at most 30 characters
-        </div>
+        @if (hasError('email', 'maxlength')) {
+            <div class="invalid-feedback">
+                Can be at most 30 characters
+            </div>
+        }
     </div>
 
     <div class="mb-3">
@@ -66,13 +77,18 @@
             formControlName="password"
             placeholder="Password">
 
-        <div *ngIf="hasError('password', 'required')" class="invalid-feedback">
-            Password is required
-        </div>
+        @if (hasError('password', 'required')) {
+            <div class="invalid-feedback">
+                Password is required
+            </div>
+        }
 
-        <div *ngIf="hasError('password', 'minlength') || hasError('password', 'maxlength')" class="invalid-feedback">
-            Must be between 10-50 characters
-        </div>
+        @if (hasError('password', 'minlength') || hasError('password', 'maxlength')) {
+            <div class="invalid-feedback">
+                Must be between 10-50 characters
+            </div>
+        }
+
     </div>
 
     <div class="mb-3">
@@ -88,13 +104,17 @@
             formControlName="confirmPassword"
             placeholder="Confirm Password">
 
-        <div *ngIf="hasError('confirmPassword', 'required')" class="invalid-feedback">
-            Confirm Password is required
-        </div>
+        @if (hasError('confirmPassword', 'required')) {
+            <div class="invalid-feedback">
+                Confirm Password is required
+            </div>
+        }
 
-        <div *ngIf="formHasError('isMatching')" class="invalid-feedback">
-            Passwords do not match
-        </div>
+        @if (formHasError('isMatching')) {
+            <div class="invalid-feedback">
+                Passwords do not match
+            </div>
+        }
     </div>
 
     <button class="btn btn-block mb-3 bg-primary text-light"

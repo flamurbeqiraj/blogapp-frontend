@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { AccountService } from '../../services/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +14,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } 
 export class RegisterComponent {
   registerForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private accountService: AccountService, private router: Router) {
     this.registerForm = this.formBuilder.group({
       fullname: [null, [Validators.minLength(10), Validators.maxLength(30)]],
       username: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
@@ -54,8 +56,8 @@ export class RegisterComponent {
       fullname: this.registerForm.get("fullname")?.value
     }
 
-    // this.accountService.register(applicationUserCreate).subscribe(() => {
-    //   this.router.navigate(['/dashboard']);
-    // })
+    this.accountService.register(applicationUserCreate).subscribe(() => {
+      this.router.navigate(['/dashboard']);
+    })
   }
 }

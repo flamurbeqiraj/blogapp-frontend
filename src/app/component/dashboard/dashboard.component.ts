@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BlogService } from '../../services/blog.service';
 import { AccountService } from '../../services/account.service';
-import { CommonModule } from '@angular/common';
 import { SummaryPipe } from '../../pipes/summary.pipe';
 
 @Component({
@@ -27,9 +26,7 @@ export class DashboardComponent {
 
   ngOnInit(): void {
     this.userBlogs = [];
-
     let currentApplicationUserId: any = this.accountService.currentUserValue?.applicationUserId;
-
     this.blogService.getByApplicationUserId(currentApplicationUserId).subscribe(userBlogs => {
       this.userBlogs = userBlogs;
     });

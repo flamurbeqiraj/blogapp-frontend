@@ -12,12 +12,11 @@ import { BlogCardComponent } from '../blog-card/blog-card.component';
   styleUrl: './blogs.component.css'
 })
 export class BlogsComponent {
-  pagedBlogResult!: PagedResoults<Blog>;
+  pagedBlogResult: any = {
+    items: []
+  };
 
-  constructor(
-    private blogService: BlogService
-
-  ) { }
+  constructor(private blogService: BlogService) {}
 
   ngOnInit(): void {
     this.loadPagedBlogResult(1, 6);

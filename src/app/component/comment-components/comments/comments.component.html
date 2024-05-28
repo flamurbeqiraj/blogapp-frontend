@@ -1,1 +1,41 @@
-<p>comments works!</p>
+<div class="container">
+
+    @for (comment of comments; track comment) {
+        <div class="row mb-3 d-block comment-box">
+            <div class="card p-3">
+                <p class="font-italic">{{comment.username}} said on {{comment.updateDate | date:'medium'}}</p>
+                @if (!comment.isEditable && !comment.isReplying) {
+                    <blockquote class="blockquote">
+                        {{comment.content}}
+                    </blockquote>
+                }
+                @if ((!!comment.isEditable && accountService.givenUserIsLoggedIn(comment.username)) || !!comment.isReplying) {
+                    <app-comment-box [comment]="comment" (commentSaved)="onCommentSaved($event, comment)"></app-comment-box>
+                }
+                @if (!comment.isEditable && !comment.isReplying) {
+                    <div class="button-box">
+                        @if (!comment.isEditable && !!accountService.givenUserIsLoggedIn(comment.username)) {
+                            <button class="btn btn-sm btn-info me-1" (click)="editComment(comment)">Edit</button>
+                        }
+                        @if (!comment.isReplying && !!accountService.isLoggedIn()) {
+                            <button class="btn btn-sm btn-primary me-1" (click)="replyComment(comment)">Reply</button>
+                        }
+                        @if (!comment.deleteConfirm && !!accountService.givenUserIsLoggedIn(comment.username)) {
+                            <button class="btn btn-sm btn-danger" (click)="showDeleteConfirm(comment)">Delete</button>
+                        }
+                        @if (!!comment.deleteConfirm) {
+                            <div>
+                                Sure?
+                                <button class="btn btn-link p-1" (click)="deleteConfirm(comment, comments)">Yes</button>
+                                <button class="btn btn-link p-1" (click)="cancelDeleteConfirm(comment)">No</button>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        @if (comment.comments) {
+            <app-comments [comments]="comment.comments"></app-comments>
+        }
+    }
+</div>

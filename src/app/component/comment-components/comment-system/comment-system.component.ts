@@ -2,11 +2,13 @@ import { Component, Input } from '@angular/core';
 import { BlogComment, BlogCommentView } from '../../../models/blog-comment';
 import { BlogCommentService } from '../../../services/blog-comment.service';
 import { AccountService } from '../../../services/account.service';
+import { CommentBoxComponent } from '../comment-box/comment-box.component';
+import { CommentsComponent } from '../comments/comments.component';
 
 @Component({
   selector: 'app-comment-system',
   standalone: true,
-  imports: [],
+  imports: [CommentBoxComponent, CommentsComponent],
   templateUrl: './comment-system.component.html',
   styleUrl: './comment-system.component.css'
 })

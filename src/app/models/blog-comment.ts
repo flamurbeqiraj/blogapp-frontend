@@ -2,7 +2,7 @@ export interface BlogCommentCreate {
     blogCommentId: number;
     blogId: number;
     content: string;
-    parentBlogCommentId?: number;
+    parentBlogCommentId?: number | null;
 }
 
 export interface BlogCommentView {
